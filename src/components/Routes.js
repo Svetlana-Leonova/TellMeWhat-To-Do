@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "../store";
-import { InputForm } from "./InputForm";
-import { Microphone } from "./Microphone";
+import InputForm from "./InputForm";
+import Microphone from "./Microphone";
+import ToDoList from "./ToDoList";
+import store from "../redux/store";
 
 const Routes = () => {
   return (
@@ -31,16 +32,9 @@ const Routes = () => {
               <p id="third">Click the "X" to remove the item from your list.</p>
             </div>
           </div>
-
-          <InputForm />
-          <Microphone />
-
-          {/* <!-- Empty List --> */}
-          <div className="row">
-            <div className="listItems col-12">
-              <ul className="col-12 offset-0 col-sm-8 offset-sm-2"></ul>
-            </div>
-          </div>
+          <Route exact path="/" component={Microphone} />
+          <Route exact path="/" component={InputForm} />
+          <Route exact path="/" component={ToDoList} />
         </div>
       </Router>
     </Provider>

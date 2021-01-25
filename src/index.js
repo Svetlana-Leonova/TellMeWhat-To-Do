@@ -1,12 +1,6 @@
 import React from "react";
+import "../dist/style.css";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
-import store from "./store";
 import Routes from "./components/Routes";
 
-render(
-  <Provider store={store}>
-    <Routes />
-  </Provider>,
-  document.getElementById("app")
-);
+render(<Routes />, document.getElementById("app"));

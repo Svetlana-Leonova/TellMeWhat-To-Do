@@ -18,10 +18,13 @@ module.exports = {
         },
       },
       {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
         test: /\.(jpg|png|svg|mp3)$/,
-        loader: "file-loader",
-        options: {
-          name: "[path][name].[hash].[ext]",
+        use: {
+          loader: "file-loader",
         },
       },
     ],
