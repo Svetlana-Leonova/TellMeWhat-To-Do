@@ -9,6 +9,16 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+router.get("/:todoId", async (req, res, next) => {
+  try {
+    const todo = await ToDoItem.findByPk(req.params.todoId);
+    res.json(todo);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const [item, isCreated] = await ToDoItem.findOrCreate({
@@ -26,10 +36,10 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:todoId", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const toDelete = await ToDoItem.findByPk(id);
+    const { todoId } = req.params;
+    const toDelete = await ToDoItem.findByPk(todoId);
     await toDelete.destroy();
     res.sendStatus(204);
   } catch (err) {
@@ -37,10 +47,13 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-// matches PUT requests to /api/puppies/:puppyId
-// router.put("/:todoId", function (req, res, next) {
-//   /* etc */
-// });
+router.put("/:todoId", async (req, res, next) => {
+  console.log("REQ.BODY>>>>>>>>>>>>>>>", req.body);
+  // console.log("REQ.PARAMS>>>>>>>>>>", req.params);
+  // const { todoId } = req.params;
+  // const toUpdate = await ToDoItem.findByPk(todoId);
+  // const updated = req.body;
+});
 
 router.use(function (req, res, next) {
   const err = new Error("Not found.");

@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../redux/reducer";
+import { addTodo, deleteTodo } from "../redux/reducer";
 import micIcon from "../../mic-icon.png";
-// import chime from "../../chime.mp3";
-// let audio = new Audio(chime);
+import chime from "../../chime.mp3";
+let audio = new Audio(chime);
 
 window.SpeechRecognition =
   window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -20,23 +20,32 @@ export class Microphone extends React.Component {
       const speechToText = event.results[0][0].transcript;
       let command = speechToText.split(" ")[0];
       let toDo = speechToText.split(" ").slice(1).join(" ");
+      let item = {
+        title: toDo,
+      };
       if (event.results[0].isFinal) {
         // console.log("COMMAND>>>>>", command);
         // console.log("TODO>>>>>", toDo);
         if (command === "add") {
-          let item = {
-            title: toDo,
-          };
           this.props.addItem(item);
           console.log("PROPS FROM MIC>>>>>", this.props);
+          //FOR LATER: If it's a 409, send a helpful message
         }
-        //   if (command.includes("delete" || "remove") {
-        // dispatch a request to find text and remove matching item from the store/state
-        //FOR LATER: if not found, send a helpful voice message?
-        // }
-        //if (command.includes("complete") {
-        //dispatch a request to find text and mark matching item as complete
-        //FOR LATER: if it is already marked as completed, send a helpful voice message?
+        if (command === "delete" || "remove") {
+          console.log(command);
+          console.log(item);
+          //find item by title and dispatch a delete request
+          // FOR LATER: if 404, send a helpful message
+        }
+        if (command === "complete") {
+          console.log(command);
+          console.log(item);
+          //find item by title and dispatch a complete request
+          // FOR LATER: if it is already marked as completed, send a helpful voice message?
+        }
+        // FOR LATER:
+        //* add a voice command to show completed tasks only
+        //* add a voice command to show incomplete tasks only
       }
     };
   }
@@ -47,7 +56,7 @@ export class Microphone extends React.Component {
         <button
           className="button"
           onClick={() => {
-            // audio.play();
+            audio.play();
             this.dictate();
           }}
         >
@@ -67,6 +76,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     addItem: (item) => dispatch(addTodo(item)),
+    removeItem: (id) => dispatch(deleteTodo(id)),
   };
 };
 
