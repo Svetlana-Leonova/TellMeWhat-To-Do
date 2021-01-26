@@ -29,7 +29,7 @@ class InputForm extends React.Component {
             name="title"
             id="userInput"
             type="text"
-            placeholder="New item..."
+            placeholder="Type new item here..."
             maxLength="27"
             onChange={this.handleEdit}
           />

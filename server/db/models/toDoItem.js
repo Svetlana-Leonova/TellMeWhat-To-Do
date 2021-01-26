@@ -28,3 +28,8 @@ module.exports = ToDoItem;
 /**
  * hooks
  */
+
+ToDoItem.beforeCreate((toDoItem) => {
+  toDoItem.title = toDoItem.title.toLowerCase();
+  return toDoItem;
+});

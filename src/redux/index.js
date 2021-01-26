@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import reducer from "./reducer";
+import toDosReducer from "./reducer";
+import itemReducer from "./itemReducer";
 
 const appReducer = combineReducers({
-  todos: reducer,
+  todos: toDosReducer,
+  item: itemReducer,
 });
 
 export default appReducer;

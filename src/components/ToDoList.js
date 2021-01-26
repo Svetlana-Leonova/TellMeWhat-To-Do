@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchTodos, deleteTodo, toggleComplete } from "../redux/reducer";
+import { fetchTodos, deleteTodo } from "../redux/reducer";
+import { toggleComplete } from "../redux/itemReducer";
 
 class ToDoList extends React.Component {
   constructor(props) {
@@ -13,9 +14,12 @@ class ToDoList extends React.Component {
     this.props.loadTodos();
   }
 
+  // componentDidUpdate() {
+  //   this.props.loadTodos();
+  // }
+
   handleClick(todo) {
     this.props.toggleStatus(todo);
-    console.log("TODO>>>>>>>>>", todo);
   }
 
   handleDelete(id) {
@@ -48,6 +52,7 @@ class ToDoList extends React.Component {
 const mapState = (state) => {
   return {
     todos: state.todos,
+    item: state.item,
   };
 };
 

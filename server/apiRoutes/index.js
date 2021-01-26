@@ -10,10 +10,27 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:todoId", async (req, res, next) => {
+router.get("/:param", async (req, res, next) => {
   try {
-    const todo = await ToDoItem.findByPk(req.params.todoId);
-    res.json(todo);
+    const { param } = req.params;
+    let item;
+    if (isNaN(Number(param))) {
+      const sanitized = param.toLowerCase();
+      item = await ToDoItem.findOne({
+        where: { title: sanitized },
+      });
+      console.log("ITEM FOUND>>>>>>>", item);
+      res.send(item);
+      return;
+    }
+    item = await ToDoItem.findByPk(param);
+    if (!item) {
+      res
+        .status(404)
+        .send("Project with this id was not found. Try a differen project id.");
+      return;
+    }
+    res.send(item);
   } catch (err) {
     next(err);
   }
@@ -48,11 +65,14 @@ router.delete("/:todoId", async (req, res, next) => {
 });
 
 router.put("/:todoId", async (req, res, next) => {
-  console.log("REQ.BODY>>>>>>>>>>>>>>>", req.body);
-  // console.log("REQ.PARAMS>>>>>>>>>>", req.params);
-  // const { todoId } = req.params;
-  // const toUpdate = await ToDoItem.findByPk(todoId);
-  // const updated = req.body;
+  try {
+    const { todoId } = req.params;
+    const itemtoUpdate = await ToDoItem.findByPk(todoId);
+    const updatedItem = itemtoUpdate.update(req.body);
+    res.send(updatedItem);
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.use(function (req, res, next) {

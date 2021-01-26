@@ -4,8 +4,6 @@ import axios from "axios";
 const GET_TODOS = "GET_TODOS";
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
-const TOGGLE_COMPLETE = "TOGGLE_COMPLETE";
-const FIND_TODO = "FIND_TODO";
 
 //ACTION CREATORS
 
@@ -27,13 +25,6 @@ const deletedTodo = (id) => {
   return {
     type: DELETE_TODO,
     id,
-  };
-};
-
-const toggledComplete = (todo) => {
-  return {
-    type: TOGGLE_COMPLETE,
-    todo,
   };
 };
 
@@ -74,7 +65,6 @@ export const deleteTodo = (id) => {
 export const toggleComplete = (todo) => {
   return async (dispatch) => {
     try {
-      //updated = {...todo, completed: !todo.completed}
       todo.completed = !todo.completed;
       const newData = await axios.put(`/api/${todo.id}`, todo);
       dispatch(toggledComplete(newData));
@@ -83,9 +73,24 @@ export const toggleComplete = (todo) => {
     }
   };
 };
+
+export const findTodo = (todo) => {
+  return async (dispatch) => {
+    try {
+      const { title } = todo;
+      console.log("TITLE FROM REDUCER", title);
+      const { data } = await axios.get(`/api/${title}`);
+      console.log("DATA FROM FIND TODO THUNK", data);
+      dispatch(foundTodo(data));
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
 const initialState = [];
 
-export default function reducer(state = initialState, action) {
+export default function toDosReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TODOS:
       return action.todos;
@@ -93,8 +98,6 @@ export default function reducer(state = initialState, action) {
       return [...state, action.todo];
     case DELETE_TODO:
       return state.filter((item) => item.id !== action.id);
-    case TOGGLE_COMPLETE:
-      return [...state, !action.todo.completed];
     default:
       return state;
   }

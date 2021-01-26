@@ -1,67 +1,73 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addTodo, deleteTodo } from "../redux/reducer";
+import { addTodo, deleteTodo, fetchTodos } from "../redux/reducer";
+import { findTodo, toggleComplete } from "../redux/itemReducer";
 import micIcon from "../../mic-icon.png";
 import chime from "../../chime.mp3";
-let audio = new Audio(chime);
+// let audio = new Audio(chime);
 
 window.SpeechRecognition =
   window.webkitSpeechRecognition || window.SpeechRecognition;
 const recognition = new SpeechRecognition();
 
-export class Microphone extends React.Component {
+class Microphone extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      speech: "",
+    };
+    this.dictate = this.dictate.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.loadTodos();
   }
 
   dictate() {
+    const commandsList = ["add", "remove", "delete", "complete"];
     recognition.start();
-    recognition.onresult = (event) => {
+    recognition.onresult = async (event) => {
       const speechToText = event.results[0][0].transcript;
-      let command = speechToText.split(" ")[0];
-      let toDo = speechToText.split(" ").slice(1).join(" ");
-      let item = {
-        title: toDo,
+      this.setState({ speech: speechToText });
+      const command = speechToText.split(" ")[0];
+      const title = speechToText.split(" ").slice(1).join(" ").toLowerCase();
+      const titleObj = {
+        title: title,
       };
-      if (event.results[0].isFinal) {
-        // console.log("COMMAND>>>>>", command);
-        // console.log("TODO>>>>>", toDo);
-        if (command === "add") {
-          this.props.addItem(item);
-          console.log("PROPS FROM MIC>>>>>", this.props);
-          //FOR LATER: If it's a 409, send a helpful message
-        }
-        if (command === "delete" || "remove") {
-          console.log(command);
-          console.log(item);
-          //find item by title and dispatch a delete request
-          // FOR LATER: if 404, send a helpful message
-        }
-        if (command === "complete") {
-          console.log(command);
-          console.log(item);
-          //find item by title and dispatch a complete request
-          // FOR LATER: if it is already marked as completed, send a helpful voice message?
-        }
-        // FOR LATER:
-        //* add a voice command to show completed tasks only
-        //* add a voice command to show incomplete tasks only
+      if (commandsList.indexOf(command) === -1) {
+        return;
+      }
+      if (command === "add") {
+        this.props.addItem(titleObj);
+        return;
+      }
+
+      if (command === "complete") {
+        await this.props.findItem(titleObj);
+        this.props.toggleStatus(this.props.item);
+        return;
+      }
+
+      if (command === "delete" || "remove") {
+        await this.props.findItem(titleObj);
+        this.props.removeItem(this.props.item.id);
+        return;
       }
     };
   }
-
   render() {
     return (
       <div>
         <button
           className="button"
           onClick={() => {
-            audio.play();
+            // audio.play();
             this.dictate();
           }}
         >
           <img className="mic-icon" src={micIcon} />
         </button>
+        <p>I heard you say: {this.state.speech}</p>
       </div>
     );
   }
@@ -70,6 +76,7 @@ export class Microphone extends React.Component {
 const mapState = (state) => {
   return {
     todos: state.todos,
+    item: state.item,
   };
 };
 
@@ -77,6 +84,9 @@ const mapDispatch = (dispatch) => {
   return {
     addItem: (item) => dispatch(addTodo(item)),
     removeItem: (id) => dispatch(deleteTodo(id)),
+    findItem: (title) => dispatch(findTodo(title)),
+    toggleStatus: (todo) => dispatch(toggleComplete(todo)),
+    loadTodos: () => dispatch(fetchTodos()),
   };
 };
 
