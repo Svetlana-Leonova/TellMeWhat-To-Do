@@ -11,27 +11,19 @@ const Routes = () => {
     <Provider store={store}>
       <Router>
         <div className="container">
-          <div className="row">
-            <div className="intro col-12">
-              <h1>To-Do List</h1>
-              <div>
-                <div className="border1"></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="helpText col-12">
-              <p id="first">
-                Enter text into the input field to add items to your list.
-              </p>
-              <p id="first">
-                For a voice command, please click the microphone icon below.
-              </p>
-              <p id="second">Click the item to mark it as complete.</p>
-              <p id="third">Click the "X" to remove the item from your list.</p>
-            </div>
-          </div>
+          <h1>To-Do List</h1>
+          <h2>Welcome to your new voice-operated to-do list!</h2>
+          <p id="first">
+            Enter text into the input field to add items to your list.
+          </p>
+          <p id="second">Click the item to mark it as complete.</p>
+          <p id="third">Click the "X" to remove the item from your list.</p>
+          <p>For a voice command, please click the microphone icon below.</p>
+          <p>
+            Please note that I currently understand only the following voice
+            commands:
+          </p>
+          <p>ADD, REMOVE (or DELETE), COMPLETE (to toggle completion status)</p>
           <Route exact path="/" component={Microphone} />
           <Route exact path="/" component={InputForm} />
           <Route exact path="/" component={ToDoList} />

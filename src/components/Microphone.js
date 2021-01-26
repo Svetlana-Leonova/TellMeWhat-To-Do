@@ -4,7 +4,7 @@ import { addTodo, deleteTodo, fetchTodos } from "../redux/reducer";
 import { findTodo, toggleComplete } from "../redux/itemReducer";
 import micIcon from "../../mic-icon.png";
 import chime from "../../chime.mp3";
-// let audio = new Audio(chime);
+let audio = new Audio(chime);
 
 window.SpeechRecognition =
   window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -61,13 +61,13 @@ class Microphone extends React.Component {
         <button
           className="button"
           onClick={() => {
-            // audio.play();
+            audio.play();
             this.dictate();
           }}
         >
           <img className="mic-icon" src={micIcon} />
         </button>
-        <p>I heard you say: {this.state.speech}</p>
+        <p>I heard you say: "{this.state.speech}"</p>
       </div>
     );
   }
