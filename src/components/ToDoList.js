@@ -14,9 +14,11 @@ class ToDoList extends React.Component {
     this.props.loadTodos();
   }
 
-  // componentDidUpdate() {
-  //   this.props.loadTodos();
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.item !== this.props.item) {
+      this.props.loadTodos();
+    }
+  }
 
   handleClick(todo) {
     this.props.toggleStatus(todo);

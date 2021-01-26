@@ -26,7 +26,7 @@ export const toggleComplete = (todo) => {
     try {
       todo.completed = !todo.completed;
       const newData = await axios.put(`/api/${todo.id}`, todo);
-      dispatch(toggledComplete(todo));
+      dispatch(toggledComplete(newData));
     } catch (err) {
       console.error(err);
     }
@@ -41,12 +41,10 @@ export const findTodo = (todo) => {
         console.error("Error, search parameter not defined");
         return;
       }
-      console.log("TITLE FROM REDUCER", title);
       const { data } = await axios.get(`/api/${title}`);
-      console.log("DATA FROM FIND TODO THUNK", data);
       dispatch(foundTodo(data));
     } catch (err) {
-      next(err);
+      console.error(err);
     }
   };
 };

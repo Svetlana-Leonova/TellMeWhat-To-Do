@@ -19,18 +19,19 @@ router.get("/:param", async (req, res, next) => {
       item = await ToDoItem.findOne({
         where: { title: sanitized },
       });
-      console.log("ITEM FOUND>>>>>>>", item);
+      if (!item) {
+        res.status(404).send("Item was not found");
+        return;
+      }
       res.send(item);
-      return;
+    } else {
+      item = await ToDoItem.findByPk(param);
+      if (!item) {
+        res.status(404).send("Item was not found");
+        return;
+      }
+      res.send(item);
     }
-    item = await ToDoItem.findByPk(param);
-    if (!item) {
-      res
-        .status(404)
-        .send("Project with this id was not found. Try a differen project id.");
-      return;
-    }
-    res.send(item);
   } catch (err) {
     next(err);
   }
