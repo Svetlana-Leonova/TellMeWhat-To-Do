@@ -57,6 +57,10 @@ router.post("/", async (req, res, next) => {
 router.delete("/:todoId", async (req, res, next) => {
   try {
     const { todoId } = req.params;
+    if (!todoId) {
+      res.status(404).send("To-do not found");
+      return;
+    }
     const toDelete = await ToDoItem.findByPk(todoId);
     await toDelete.destroy();
     res.sendStatus(204);
