@@ -7,7 +7,7 @@ I built TellMeWhat-To-Do as part of a 4-day hackathon while attending the Grace 
 
 I wanted to build something that would leverage accessibility for people with limited mobility in their extremities.
 
-My application is a variation of your typical to-do list - *with a twist* - in addition to typing into the input fields, users can use voice commands to add and delete items from the list as well as mark them complete.
+My application is a variation of your typical to-do list - *with a twist:* in addition to typing into the input fields, users can use voice commands to add and delete items from the list as well as mark them complete.
 
 ## Technologies
 
