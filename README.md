@@ -17,11 +17,11 @@ PostgreSQL, NodeJS, React/Redux, Web Speech API
 
 1. Install all node.js dependencies:
 
-  npm install
+     npm install
 
 2. Start the app in dev mode:
 
-  npm run start-dev
+     npm run start-dev
 
 
 ## Published Application
