@@ -9,7 +9,7 @@
     "build-watch": "webpack -w",
     "serve": "nodemon server/server.js",
     "start-dev": "npm run build-watch & npm run serve",
-    "start": "webpack"
+    "start": "npm run build & npm run serve"
   },
   "keywords": [],
   "author": "SL",

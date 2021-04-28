@@ -131,9 +131,6 @@ input {
 #instructions {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
-  /* align-items: baseline; */
-  /* align-content: space-around; */
 }
 .button {
   display: flex;
