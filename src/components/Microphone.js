@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { addTodo, deleteTodo, fetchTodos } from "../redux/reducer";
 import { findTodo, toggleComplete } from "../redux/itemReducer";
-import micIcon from "../../mic-icon.png";
 import chime from "../../chime.mp3";
 let audio = new Audio(chime);
 
@@ -57,7 +56,15 @@ class Microphone extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="dictate-container">
+        <h1>TO-DO LIST</h1>
+        <h2>Welcome to your voice-controlled to-do list app!</h2>
+        <div>
+          <p>Click the microphone icon below and start speaking.</p>
+          <p>Say: "ADD [YOUR-TO-DO]" - to add an item to the list</p>
+          <p>Say: "REMOVE [YOUR-TO-DO]" - to remove an item from the list</p>
+          <p>Say: "COMPLETE [YOUR-TO-DO]" - to toggle completion status</p>
+        </div>
         <button
           className="button"
           onClick={() => {
@@ -65,7 +72,7 @@ class Microphone extends React.Component {
             this.dictate();
           }}
         >
-          <img className="mic-icon" src={micIcon} />
+          <span className="material-icons">mic</span>
         </button>
         <p>I heard you say: "{this.state.speech}"</p>
       </div>
