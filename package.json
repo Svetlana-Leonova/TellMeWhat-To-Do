@@ -11,9 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "serve": "node server/server.js",
+    "serve": "nodemon server/server.js",
     "start-dev": "npm run build-watch & npm run serve",
-    "start": "npm run build & npm run serve"
+    "start": "npm run build"
   },
   "keywords": [],
   "author": "SL",
