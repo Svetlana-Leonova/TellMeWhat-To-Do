@@ -24,14 +24,6 @@ class InputForm extends React.Component {
   render() {
     return (
       <div>
-        <hr />
-        <p>Tired of voice commands? Use regular text input</p>
-        <p id="first">
-          Enter text into the input field to add items to your list.
-        </p>
-        <p id="second">Click the item to mark it as complete.</p>
-        <p id="third">Click the "X" to remove the item from your list.</p>
-        <hr />
         <div className="row">
           <form className="col-12" onSubmit={this.handleSubmit}>
             <input

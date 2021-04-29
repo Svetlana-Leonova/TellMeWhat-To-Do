@@ -57,14 +57,6 @@ class Microphone extends React.Component {
   render() {
     return (
       <div id="dictate-container">
-        <h1>TO-DO LIST</h1>
-        <h2>Welcome to your voice-controlled to-do list app!</h2>
-        <div>
-          <p>Click the microphone icon below and start speaking.</p>
-          <p>Say: "ADD [YOUR-TO-DO]" - to add an item to the list</p>
-          <p>Say: "REMOVE [YOUR-TO-DO]" - to remove an item from the list</p>
-          <p>Say: "COMPLETE [YOUR-TO-DO]" - to toggle completion status</p>
-        </div>
         <button
           className="button"
           onClick={() => {

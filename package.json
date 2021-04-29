@@ -1,15 +1,20 @@
 {
-  "name": "stackathon",
+  "name": "tellmewhattodo",
   "version": "1.0.0",
   "description": "to-do list with speech recognition",
   "private": true,
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "serve": "node server/server.js",
+    "serve": "nodemon server/server.js",
     "start-dev": "npm run build-watch & npm run serve",
-    "start": "npm run build & npm run serve"
+    "start": "node server/server.js",
+    "heroku-postbuild": "webpack"
   },
   "keywords": [],
   "author": "SL",
@@ -22,10 +27,12 @@
     "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "material-design-icons": "^3.0.1",
+    "morgan": "^1.10.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "react": "^17.0.1",
@@ -41,8 +48,5 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.36.1",
     "webpack-cli": "^4.6.0"
-  },
-  "devDependencies": {
-    "morgan": "^1.10.0"
   }
 }

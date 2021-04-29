@@ -19,16 +19,35 @@ p {
   font-weight: 600;
 }
 
-#first {
+table {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #ffcd5d;
+  border-bottom: 2px solid #ffcd5d;
+}
+
+td {
+  width: 50%;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+}
+
+.first {
   margin-top: 10px;
   color: #ffcd5d;
 }
 
-#second {
+.second {
   color: #51df70;
 }
 
-#third {
+.third {
   color: #025f70;
   margin-bottom: 30px;
 }
@@ -51,15 +70,6 @@ p {
 #enter:hover {
   background-color: #02798f;
   color: #ffcd5d;
-}
-
-hr {
-  border: none;
-  display: inline-block;
-  height: 4px;
-  margin: 0 0 14px;
-  width: 45%;
-  background-color: #ffcd5d;
 }
 
 ul {
