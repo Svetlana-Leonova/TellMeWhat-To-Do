@@ -15,15 +15,18 @@ PostgreSQL, NodeJS, React/Redux, Web Speech API
 
 ## Development Mode Setup & Installation
 
-1. Install all node.js dependencies:
+1. Create a local Postgres database named 'tellmewhattodo'.
+
+     createdb tellmewhattodo
+
+2. Install all node.js dependencies:
 
      npm install
 
-2. Start the app in dev mode:
+3. Start the app in dev mode:
 
      npm run start-dev
 
-
-## Published Application
-
 ## Preview
+
+<img src="/" width=200 align=center>
