@@ -15,7 +15,7 @@ PostgreSQL, NodeJS, React/Redux, Web Speech API
 
 ## Development Mode Setup & Installation
 
-1. Create a local Postgres database named 'tellmewhattodo'.
+1. Create a local Postgres database named 'tellmewhattodo':
 
      createdb tellmewhattodo
 
