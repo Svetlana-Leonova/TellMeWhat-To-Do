@@ -13,7 +13,8 @@
     "build-watch": "webpack -w",
     "serve": "nodemon server/server.js",
     "start-dev": "npm run build-watch & npm run serve",
-    "start": "npm run build"
+    "start": "node server/server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
   "author": "SL",
