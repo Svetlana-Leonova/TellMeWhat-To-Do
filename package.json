@@ -1,5 +1,5 @@
 {
-  "name": "stackathon",
+  "name": "tellmewhattodo",
   "version": "1.0.0",
   "description": "to-do list with speech recognition",
   "private": true,
@@ -27,6 +27,7 @@
     "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
     "css-loader": "^5.2.4",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
