@@ -29,4 +29,4 @@ PostgreSQL, NodeJS, React/Redux, Web Speech API
 
 ## Preview
 
-<img src="/" width=200 align=center>
+![](images/TellMeWhat-To-Do-preview.png)
